@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import Constants from "expo-constants";
 
 const StatusBarHeight = Constants.statusBarHeight;
@@ -31,12 +31,55 @@ export const InnerContainer = styled.View`
   align-items: center;
 `;
 
+export const WelcomeContainer = styled(InnerContainer)`
+  padding: 25px;
+  padding-top: 10px;
+  justify-content: center;
+`;
+
+export const WelcomeImage = styled.Image`
+  height: 50%;
+  min-width: 100%;
+`;
+
+export const Avatar = styled.Image`
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50px;
+  border-width: 2px;
+  border-color: ${secondary};
+  margin-bottom: 10px;
+  margin-top: 10px;
+`;
+
 export const PageTitle = styled.Text`
   font-size: 30px;
   text-align: center;
   font-weight: bold;
   color: ${brand};
   padding: 10px;
+  ${({ wellcome }) =>
+    wellcome &&
+    `
+    font-size: 35px;
+  `}
+`;
+
+export const PageSubtitle = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary};
+
+  ${({ wellcome }) =>
+    wellcome &&
+    `
+    margin-top: 5px;
+    font-weight: normal;
+  `}
 `;
 
 export const StyledFormArea = styled.View`
