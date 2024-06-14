@@ -19,16 +19,18 @@ export function WelcomeScreen({ navigation }) {
       <InnerContainer>
         <WelcomeImage
           resizeMode="cover"
-          source={require("./../../assets/icon.png")}
+          source={require("./../../assets/welcome.jpeg")}
         />
         <WelcomeContainer>
           <StyledFormArea>
             <Avatar
               resizeMode="cover"
-              source={require("./../../assets/icon.png")}
+              source={require("./../../assets/avatar.jpg")}
             />
-            <PageSubtitle welcome={true}>pepe</PageSubtitle>
-            <PageSubtitle welcome={true}>pepe@example.com</PageSubtitle>
+            <PageSubtitle welcome={true}>José Madrid</PageSubtitle>
+            <PageSubtitle welcome={true}>
+              fj.madrid.cuevas@gmail.com
+            </PageSubtitle>
             <Line />
             <StyledButton
               onPress={() => {
