@@ -11,6 +11,7 @@ import {
   PageTitle,
   PageSubtitle,
 } from "../components/styled";
+import { TouchableOpacity } from "react-native-web";
 
 export function WelcomeScreen({ navigation }) {
   return (
@@ -23,10 +24,12 @@ export function WelcomeScreen({ navigation }) {
         />
         <WelcomeContainer>
           <StyledFormArea>
-            <Avatar
-              resizeMode="cover"
-              source={require("./../../assets/avatar.jpg")}
-            />
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Avatar
+                resizeMode="cover"
+                source={require("./../../assets/avatar.jpg")}
+              />
+            </TouchableOpacity>
             <PageSubtitle welcome={true}>José Madrid</PageSubtitle>
             <PageSubtitle welcome={true}>
               fj.madrid.cuevas@gmail.com
