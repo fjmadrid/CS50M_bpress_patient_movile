@@ -90,3 +90,15 @@ export const RightIcon = styled.TouchableOpacity`
   position: absolute;
   z-index: 1;
 `;
+
+export const MsgBox = styled.Text`
+  text-align: center;
+  font-size: 13px;
+`;
+
+export const Line = styled.View`
+  height: 1px;
+  width: 100%;
+  background-color: ${darkLight};
+  margin-vertical: 10px;
+`;
