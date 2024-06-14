@@ -85,7 +85,7 @@ export const StyledButtonText = styled.Text`
   font-size: 16px;
   ${({ google }) =>
     google == true &&
-    `
+    `    
     padding: 25px;
   `}
 `;
@@ -114,4 +114,28 @@ export const Line = styled.View`
   width: 100%;
   background-color: ${darkLight};
   margin-vertical: 10px;
+`;
+
+export const ExtraView = styled.View`
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+`;
+
+export const ExtraText = styled.Text`
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: ${tertiary};
+`;
+
+export const TextLink = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextLinkContent = styled.Text`
+  color: ${brand};
+  font-size: 15px;
 `;
