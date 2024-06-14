@@ -32,7 +32,10 @@ export function LoginScreen({ navigation }) {
       <InnerContainer>
         <Formik
           initialValues={{ user: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => {
+            console.log(`login with values: ${JSON.stringify(values)}`);
+            navigation.navigate("Home");
+          }}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <StyledFormArea>
