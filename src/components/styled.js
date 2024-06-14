@@ -70,11 +70,24 @@ export const StyledButton = styled.TouchableOpacity`
   border-radius: 5px;
   margin-vertical: 5px;
   height: 60px;
+
+  ${({ google }) =>
+    google == true &&
+    `
+    flex-direction: row;
+    background-color: ${green};
+    justify-content: center;
+  `}
 `;
 
 export const StyledButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;
+  ${({ google }) =>
+    google == true &&
+    `
+    padding: 25px;
+  `}
 `;
 
 export const LeftIcon = styled.View`
