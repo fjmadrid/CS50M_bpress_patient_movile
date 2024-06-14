@@ -11,11 +11,13 @@ import {
   RightIcon,
   StyledButton,
   StyledButtonText,
+  MsgBox,
+  Line,
 } from "../components/styled";
 
-import { Octicons, Ionicons } from "@expo/vector-icons";
+import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 
-const { darkLight, brand } = Colors;
+const { darkLight, brand, primary } = Colors;
 
 import { Formik } from "formik";
 
@@ -52,8 +54,16 @@ export function LoginScreen({ navigation }) {
                 hidePassword={hidePassword}
                 setHidePassword={setHidePassword}
               />
-              <StyledButton>
+              <MsgBox>...</MsgBox>
+              <StyledButton onPress={handleSubmit}>
                 <StyledButtonText>Login</StyledButtonText>
+              </StyledButton>
+              <Line />
+              <StyledButton google={true} onPress={handleSubmit}>
+                <Fontisto name="google" color={primary} size={25} />
+                <StyledButtonText google={true}>
+                  Sign in with Google
+                </StyledButtonText>
               </StyledButton>
             </StyledFormArea>
           )}
