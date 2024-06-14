@@ -66,6 +66,7 @@ export const StyledButton = styled.TouchableOpacity`
   padding: 15px;
   background-color: ${brand};
   justify-content: center;
+  align-items: center;
   border-radius: 5px;
   margin-vertical: 5px;
   height: 60px;
