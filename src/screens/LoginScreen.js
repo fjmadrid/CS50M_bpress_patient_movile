@@ -9,6 +9,8 @@ import {
   Colors,
   LeftIcon,
   RightIcon,
+  StyledButton,
+  StyledButtonText,
 } from "../components/styled";
 
 import { Octicons, Ionicons } from "@expo/vector-icons";
@@ -50,6 +52,9 @@ export function LoginScreen({ navigation }) {
                 hidePassword={hidePassword}
                 setHidePassword={setHidePassword}
               />
+              <StyledButton>
+                <StyledButtonText>Login</StyledButtonText>
+              </StyledButton>
             </StyledFormArea>
           )}
         </Formik>
