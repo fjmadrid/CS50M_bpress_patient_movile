@@ -13,6 +13,10 @@ import {
   StyledButtonText,
   MsgBox,
   Line,
+  ExtraView,
+  ExtraText,
+  TextLink,
+  TextLinkContent,
 } from "../components/styled";
 
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
@@ -65,6 +69,12 @@ export function LoginScreen({ navigation }) {
                   Sign in with Google
                 </StyledButtonText>
               </StyledButton>
+              <ExtraView>
+                <ExtraText>Don't have an account yet?</ExtraText>
+                <TextLink>
+                  <TextLinkContent>sign up</TextLinkContent>
+                </TextLink>
+              </ExtraView>
             </StyledFormArea>
           )}
         </Formik>
