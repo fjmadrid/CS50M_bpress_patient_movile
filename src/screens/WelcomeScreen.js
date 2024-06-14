@@ -11,7 +11,8 @@ import {
   PageTitle,
   PageSubtitle,
 } from "../components/styled";
-import { TouchableOpacity } from "react-native-web";
+
+import { TouchableOpacity } from "react-native";
 
 export function WelcomeScreen({ navigation }) {
   return (
