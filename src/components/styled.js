@@ -38,7 +38,7 @@ export const WelcomeContainer = styled(InnerContainer)`
 `;
 
 export const WelcomeImage = styled.Image`
-  height: 50%;
+  height: 40%;
   min-width: 100%;
 `;
 
