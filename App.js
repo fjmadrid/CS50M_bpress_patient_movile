@@ -19,7 +19,7 @@ export default function App() {
           headerTintColor: primary,
           headerTitleAlign: "center",
         }}
-        initialRouteName="Welcome"
+        initialRouteName="Login"
       >
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />

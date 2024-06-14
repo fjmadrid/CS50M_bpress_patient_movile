@@ -36,7 +36,7 @@ export function LoginScreen({ navigation }) {
             initialValues={{ user: "", password: "" }}
             onSubmit={(values) => {
               console.log(`login with values: ${JSON.stringify(values)}`);
-              navigation.navigate("Home");
+              navigation.navigate("Welcome");
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
