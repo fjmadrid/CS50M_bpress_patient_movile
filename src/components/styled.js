@@ -86,7 +86,7 @@ export const StyledButtonText = styled.Text`
   ${({ google }) =>
     google == true &&
     `    
-    padding: 25px;
+    padding-left: 15px;
   `}
 `;
 
