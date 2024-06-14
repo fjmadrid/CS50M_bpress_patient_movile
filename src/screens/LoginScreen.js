@@ -77,7 +77,13 @@ export function LoginScreen({ navigation }) {
                 <ExtraView>
                   <ExtraText>Don't have an account yet?</ExtraText>
                   <TextLink>
-                    <TextLinkContent>sign up</TextLinkContent>
+                    <TextLinkContent
+                      onPress={() => {
+                        navigation.navigate("Signup");
+                      }}
+                    >
+                      Sign up
+                    </TextLinkContent>
                   </TextLink>
                 </ExtraView>
               </StyledFormArea>
