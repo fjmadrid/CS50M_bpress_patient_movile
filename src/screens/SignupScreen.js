@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { DateTimePicker } from "@react-native-community/datetimepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 import {
   StyledContainer,
@@ -33,13 +33,10 @@ export function SignupScreen({ navigation }) {
   const [hideConfirmedPassword, setHideConfirmedPassword] = useState(true);
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [date, setDate] = useState(new Date(2000, 0, 1));
-  // Actual selected date of birth
-  const [dob, setDob] = useState();
-  const onChange = (event, selectDate) => {
-    const currentDate = selectedDate || date;
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
     setShowDateTimePicker(false);
     setDate(currentDate);
-    setDob(currentDate);
   };
 
   const showDatePicker = () => {
@@ -57,7 +54,7 @@ export function SignupScreen({ navigation }) {
               mode="date"
               is24Hour={true}
               display="default"
-              onChange={(date) => setDate(date)}
+              onChange={onChange}
             />
           )}
           <Formik
@@ -102,7 +99,7 @@ export function SignupScreen({ navigation }) {
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange("birthDate")}
                   onBlur={handleBlur("birthDate")}
-                  value={dob ? dob.toDateString() : ""}
+                  value={date.toDateString()}
                   isDate={true}
                   editable={false}
                   showDatePicker={showDatePicker}
