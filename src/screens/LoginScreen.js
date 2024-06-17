@@ -21,10 +21,10 @@ import {
 
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 
-const { darkLight, brand, primary } = Colors;
-
 import { Formik } from "formik";
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
+
+const { darkLight, brand, primary } = Colors;
 
 export function LoginScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);

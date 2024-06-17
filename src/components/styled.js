@@ -16,7 +16,7 @@ export const Colors = {
   red: "#EF4444",
 };
 
-const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
+const { primary, secondary, tertiary, darkLight, brand, green } = Colors;
 
 export const StyledContainer = styled.View`
   flex: 1;
@@ -115,7 +115,7 @@ export const StyledButton = styled.TouchableOpacity`
   height: 60px;
 
   ${({ google }) =>
-    google == true &&
+    google &&
     `
     flex-direction: row;
     background-color: ${green};
@@ -127,7 +127,7 @@ export const StyledButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;
   ${({ google }) =>
-    google == true &&
+    google &&
     `    
     padding-left: 15px;
   `}

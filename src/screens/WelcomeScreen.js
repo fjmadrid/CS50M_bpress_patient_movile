@@ -8,7 +8,6 @@ import {
   WelcomeContainer,
   WelcomeImage,
   Avatar,
-  PageTitle,
   PageSubtitle,
 } from "../components/styled";
 

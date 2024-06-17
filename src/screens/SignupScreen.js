@@ -20,13 +20,13 @@ import {
   TextLinkContent,
 } from "../components/styled";
 
-import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
-
-const { darkLight, brand, primary } = Colors;
+import { Octicons, Ionicons } from "@expo/vector-icons";
 
 import { Formik } from "formik";
 
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
+
+const { darkLight, brand } = Colors;
 
 export function SignupScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);
