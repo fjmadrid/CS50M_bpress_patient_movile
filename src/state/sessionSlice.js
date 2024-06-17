@@ -10,4 +10,6 @@ export const sessionSlice = createSlice({
   reducers: {},
 });
 
+export const selectSessionToken = (state) => state.session.token;
+
 export default sessionSlice.reducer;
