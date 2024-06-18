@@ -19,24 +19,15 @@ export function SplashScreen({ navigation }) {
       console.log(`Not valid token: "${token}"`);
       console.log("Navigate to Login screen");
       navigation.navigate("Login");
-    } else if (patientFetchStatus === "idle" || doctorFetchStatus === "idle") {
+    } else {
       console.log(`Valid token: "${token}"`);
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
-      if (patientFetchStatus === "idle") dispatch(fetchPatient());
-      //if (doctorFetchStatus === "idle") dispatch(fetchDoctor());
-    } else if (
-      patientFetchStatus === "succeeded" &&
-      doctorFetchStatus === "succeeded"
-    ) {
       navigation.navigate("Welcome");
-    } else if (
-      patientFetchStatus === "failed" ||
-      doctorFetchStatus === "failed"
-    ) {
-      navigation.navigate("Login");
     }
   }, [dispatch, navigation, token, patientFetchStatus, doctorFetchStatus]);
+
   console.log("En splash screen!");
+
   return (
     <>
       <StatusBar style="light" />

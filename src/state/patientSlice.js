@@ -16,11 +16,19 @@ export const initialPatientState = {
   error: null,
 };
 
-export const fetchPatient = createAsyncThunk("patient/fetch", async () => {
-  const credentials = useSelector(selectSessionCredentials);
-  const response = await api_fetchPatient(credentials);
-  return response.data;
-});
+export const fetchPatient = createAsyncThunk(
+  "patient/fetch",
+  async (credentials) => {
+    //const credentials = useSelector(selectSessionCredentials);
+    console.log(
+      `Patient slice fetching patient data using credentials: ${JSON.stringify(
+        credentials
+      )}`
+    );
+    const response = await api_fetchPatient(credentials);
+    return response.data;
+  }
+);
 
 export const patientSlice = createSlice({
   name: "patient",
@@ -32,11 +40,18 @@ export const patientSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchPatient.fulfilled, (state, action) => {
+        console.log(
+          `Fulfilled a patient fetch with payload:${JSON.stringify(
+            action.payload
+          )})`
+        );
         state.status = "succeeded";
-        state.data.id = action.payload.data["id"];
-        state.data.firstName = action.payload.data["fullname"];
-        state.data.weight = action.payload.data["weight"];
-        state.data.height = action.payload.data["height"];
+        state.data.id = action.payload["user"]["id"];
+        state.data.firstName = action.payload["user"]["username"];
+        state.data.email = `${action.payload["user"]["username"]}@example.com`;
+        state.data.birthDate = new Date(action.payload["birthdate"]);
+        state.data.weight = action.payload["weight"];
+        state.data.height = action.payload["height"];
       })
       .addCase(fetchPatient.rejected, (state, action) => {
         state.status = "failed";

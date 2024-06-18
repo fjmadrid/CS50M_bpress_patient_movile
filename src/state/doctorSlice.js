@@ -22,9 +22,15 @@ export const doctorSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchDoctor.fulfilled, (state, action) => {
+        console.log(
+          `Fulfilled a doctor fetch with payload:${JSON.stringify(
+            action.payload
+          )})`
+        );
         state.status = "succeeded";
-        state.data.id = action.payload.data["id"];
-        state.data.firstName = action.payload.data["fullname"];
+        state.data.id = action.payload["id"];
+        state.data.firstName = action.payload["username"];
+        state.data.email = `${action.payload["username"]}@example.com`;
       })
       .addCase(fetchDoctor.rejected, (state, action) => {
         state.status = "failed";

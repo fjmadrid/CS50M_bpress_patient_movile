@@ -28,6 +28,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   signIn,
   setSessionCredentials,
+  selectSessionCredentials,
   selectSessionLoginStatus,
   selectSessionLoginError,
 } from "../state/sessionSlice";
@@ -46,10 +47,6 @@ const { darkLight, brand, primary } = Colors;
 
 export function LoginScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);
-  // const [credentials, setCredentials] = useState({
-  //   username: "",
-  //   password: "",
-  // });
   const loginStatus = useSelector(selectSessionLoginStatus);
   const loginError = useSelector(selectSessionLoginError);
   const patientFetchStatus = useSelector(selectPatientFetchStatus);
@@ -57,18 +54,19 @@ export function LoginScreen({ navigation }) {
   const doctorFetchStatus = useSelector(selectDoctorFetchStatus);
   const doctorFetchError = useSelector(selectDoctorFetchError);
   const dispatch = useDispatch();
+  const credentials = useSelector(selectSessionCredentials);
 
   useEffect(() => {
     if (loginStatus === "succeeded") {
       if (patientFetchStatus === "idle" || doctorFetchStatus === "idle") {
         if (patientFetchStatus === "idle") {
           console.log("Dispatching action to fetch the patient data.");
-          dispatch(fetchPatient());
+          dispatch(fetchPatient(credentials));
         }
-        // if (doctorFetchStatus === "idle") {
-        //   console.log("Dispatching action to fetch the doctor data.");
-        //   dispatch(fetchDoctor());
-        // }
+        if (doctorFetchStatus === "idle") {
+          console.log("Dispatching action to fetch the doctor data.");
+          dispatch(fetchDoctor());
+        }
       } else if (
         patientFetchStatus === "succeeded" ||
         doctorFetchStatus === "succeeded"
@@ -82,6 +80,7 @@ export function LoginScreen({ navigation }) {
     loginStatus,
     patientFetchStatus,
     doctorFetchStatus,
+    credentials,
   ]);
   console.log("En login screen!");
   return (
