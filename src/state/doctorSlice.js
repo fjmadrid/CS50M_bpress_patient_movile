@@ -7,7 +7,8 @@ export const initialDoctorState = {
   error: null,
 };
 
-export const fetchDoctor = createAsyncThunk("patient/fetch", async () => {
+export const fetchDoctor = createAsyncThunk("doctor/fetch", async () => {
+  console.log("In doctor slice, fetching doctor data.");
   const response = await api_fetchDoctor();
   return response.data;
 });
@@ -23,7 +24,7 @@ export const doctorSlice = createSlice({
       })
       .addCase(fetchDoctor.fulfilled, (state, action) => {
         console.log(
-          `Fulfilled a doctor fetch with payload:${JSON.stringify(
+          `In doctor slice, fulfilled fetch with payload:${JSON.stringify(
             action.payload
           )})`
         );
