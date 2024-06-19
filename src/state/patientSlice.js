@@ -49,7 +49,7 @@ export const patientSlice = createSlice({
         state.data.id = action.payload["user"]["id"];
         state.data.firstName = action.payload["user"]["username"];
         state.data.email = `${action.payload["user"]["username"]}@example.com`;
-        state.data.birthDate = new Date(action.payload["birthdate"]);
+        state.data.birthDate = action.payload["birthdate"];
         state.data.weight = action.payload["weight"];
         state.data.height = action.payload["height"];
       })
