@@ -3,19 +3,20 @@ import axios from "axios";
 import { API_URL } from "../constants";
 
 export const api_login = (credentials) => {
+  console.log("In api, login and fetching a session token");
   return axios.post(API_URL + "authentication/login/", credentials);
 };
 
 export const api_fetchPatient = (credentials) => {
   console.log(
-    "Fetching the user data with credentials: ",
+    "In api, fetching the patient data with credentials: ",
     JSON.stringify(credentials)
   );
   return axios.get(API_URL + "patient/", credentials);
 };
 
 export const api_fetchDoctor = () => {
-  console.log("Fetching the assigned doctor ... ");
+  console.log("In api, fetching the assigned doctor");
   return axios.get(API_URL + "patient/doctor");
 };
 

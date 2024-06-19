@@ -21,7 +21,7 @@ export const fetchPatient = createAsyncThunk(
   async (credentials) => {
     //const credentials = useSelector(selectSessionCredentials);
     console.log(
-      `Patient slice fetching patient data using credentials: ${JSON.stringify(
+      `In patient slice, fetching patient data using credentials: ${JSON.stringify(
         credentials
       )}`
     );
@@ -41,7 +41,7 @@ export const patientSlice = createSlice({
       })
       .addCase(fetchPatient.fulfilled, (state, action) => {
         console.log(
-          `Fulfilled a patient fetch with payload:${JSON.stringify(
+          `In patient slice, fulfilled fetch with payload:${JSON.stringify(
             action.payload
           )})`
         );

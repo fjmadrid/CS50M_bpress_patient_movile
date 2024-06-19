@@ -60,11 +60,15 @@ export function LoginScreen({ navigation }) {
     if (loginStatus === "succeeded") {
       if (patientFetchStatus === "idle" || doctorFetchStatus === "idle") {
         if (patientFetchStatus === "idle") {
-          console.log("Dispatching action to fetch the patient data.");
+          console.log(
+            "In login screen, dispatching action to fetch the patient data."
+          );
           dispatch(fetchPatient(credentials));
         }
         if (doctorFetchStatus === "idle") {
-          console.log("Dispatching action to fetch the doctor data.");
+          console.log(
+            "In login screen, dispatching action to fetch the doctor data."
+          );
           dispatch(fetchDoctor());
         }
       } else if (
