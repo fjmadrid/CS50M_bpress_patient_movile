@@ -1,7 +1,5 @@
-import { useSelector } from "react-redux";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api_fetchPatient } from "../api/api.js";
-import { selectSessionCredentials } from "./sessionSlice.js";
 export const initialPatientState = {
   data: {
     id: "",
