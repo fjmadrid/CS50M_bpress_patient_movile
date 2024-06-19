@@ -4,8 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { InnerContainer } from "../components/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSessionToken } from "../state/sessionSlice";
-import { fetchPatient, selectPatientFetchStatus } from "../state/patientSlice";
-import { fetchDoctor, selectDoctorFetchStatus } from "../state/doctorSlice";
+import { selectPatientFetchStatus } from "../state/patientSlice";
+import { selectDoctorFetchStatus } from "../state/doctorSlice";
 import axios from "axios";
 
 export function SplashScreen({ navigation }) {
