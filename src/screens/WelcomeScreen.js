@@ -11,9 +11,18 @@ import {
   PageSubtitle,
 } from "../components/styled";
 
+import { useSelector } from "react-redux";
+import {
+  selectPatientFirstName,
+  selectPatientEmail,
+} from "../state/patientSlice";
+
 import { TouchableOpacity } from "react-native";
 
 export function WelcomeScreen({ navigation }) {
+  const patientFirstName = useSelector(selectPatientFirstName);
+  const patientEmail = useSelector(selectPatientEmail);
+
   return (
     <>
       <StatusBar style="light" />
@@ -30,10 +39,8 @@ export function WelcomeScreen({ navigation }) {
                 source={require("./../../assets/avatar.jpg")}
               />
             </TouchableOpacity>
-            <PageSubtitle welcome={true}>José Madrid</PageSubtitle>
-            <PageSubtitle welcome={true}>
-              fj.madrid.cuevas@gmail.com
-            </PageSubtitle>
+            <PageSubtitle welcome={true}>{patientFirstName}</PageSubtitle>
+            <PageSubtitle welcome={true}>{patientEmail}</PageSubtitle>
             <Line />
             <StyledButton
               onPress={() => {
