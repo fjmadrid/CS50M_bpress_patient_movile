@@ -23,6 +23,9 @@ export const sessionSlice = createSlice({
   name: "patient",
   initialState: initialSessionState,
   reducers: {
+    resetSessionState(state, action) {
+      state = initialSessionState;
+    },
     setSessionToken(state, action) {
       state.data.token = action.payload;
     },
@@ -60,6 +63,7 @@ export const selectSessionCredentials = (state) =>
 export const selectSessionLoginStatus = (state) => state.session.status;
 export const selectSessionLoginError = (state) => state.session.error;
 
-export const { setSessionToken, setSessionCredentials } = sessionSlice.actions;
+export const { resetSessionState, setSessionToken, setSessionCredentials } =
+  sessionSlice.actions;
 
 export default sessionSlice.reducer;
