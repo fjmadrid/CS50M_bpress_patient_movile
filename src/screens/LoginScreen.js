@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import {
   StyledContainer,
   InnerContainer,
@@ -28,20 +28,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   signIn,
   setSessionCredentials,
-  selectSessionCredentials,
   selectSessionLoginStatus,
   selectSessionLoginError,
 } from "../state/sessionSlice";
-import {
-  fetchPatient,
-  selectPatientFetchStatus,
-  selectPatientFetchError,
-} from "../state/patientSlice";
-import {
-  fetchDoctor,
-  selectDoctorFetchStatus,
-  selectDoctorFetchError,
-} from "../state/doctorSlice";
 
 const { darkLight, brand, primary } = Colors;
 
@@ -49,44 +38,16 @@ export function LoginScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);
   const loginStatus = useSelector(selectSessionLoginStatus);
   const loginError = useSelector(selectSessionLoginError);
-  const patientFetchStatus = useSelector(selectPatientFetchStatus);
-  const patientFetchError = useSelector(selectPatientFetchError);
-  const doctorFetchStatus = useSelector(selectDoctorFetchStatus);
-  const doctorFetchError = useSelector(selectDoctorFetchError);
   const dispatch = useDispatch();
-  const credentials = useSelector(selectSessionCredentials);
 
   useEffect(() => {
     if (loginStatus === "succeeded") {
-      if (patientFetchStatus === "idle" || doctorFetchStatus === "idle") {
-        if (patientFetchStatus === "idle") {
-          console.log(
-            "In login screen, dispatching action to fetch the patient data."
-          );
-          dispatch(fetchPatient(credentials));
-        }
-        if (doctorFetchStatus === "idle") {
-          console.log(
-            "In login screen, dispatching action to fetch the doctor data."
-          );
-          dispatch(fetchDoctor());
-        }
-      } else if (
-        patientFetchStatus === "succeeded" ||
-        doctorFetchStatus === "succeeded"
-      ) {
-        navigation.navigate("Welcome");
-      }
+      navigation.navigate("Welcome");
     }
-  }, [
-    dispatch,
-    navigation,
-    loginStatus,
-    patientFetchStatus,
-    doctorFetchStatus,
-    credentials,
-  ]);
-  console.log("En login screen!");
+  }, [dispatch, navigation, loginStatus]);
+
+  console.log(`In login screen. Login status:${loginStatus}`);
+
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
@@ -127,19 +88,16 @@ export function LoginScreen({ navigation }) {
                   setHidePassword={setHidePassword}
                 />
                 {loginStatus === "failed" && <MsgBox>{loginError}</MsgBox>}
-                {doctorFetchStatus === "failed" && (
-                  <MsgBox>
-                    Error fetching doctor data: {doctorFetchError}
-                  </MsgBox>
+                {loginStatus !== "loading" && (
+                  <StyledButton onPress={handleSubmit}>
+                    <StyledButtonText>Login</StyledButtonText>
+                  </StyledButton>
                 )}
-                {patientFetchStatus === "failed" && (
-                  <MsgBox>
-                    Error fetching patient data:{patientFetchError}
-                  </MsgBox>
+                {loginStatus === "loading" && (
+                  <StyledButton disabled={true}>
+                    <ActivityIndicator size="large" color={primary} />
+                  </StyledButton>
                 )}
-                <StyledButton onPress={handleSubmit}>
-                  <StyledButtonText>Login</StyledButtonText>
-                </StyledButton>
                 <Line />
                 <StyledButton google={true} onPress={handleSubmit}>
                   <Fontisto name="google" color={primary} size={25} />

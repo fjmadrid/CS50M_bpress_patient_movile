@@ -1,17 +1,12 @@
 import { useEffect } from "react";
-import { ActivityIndicator } from "react-native-web";
 import { StatusBar } from "expo-status-bar";
 import { InnerContainer } from "../components/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSessionToken } from "../state/sessionSlice";
-import { selectPatientFetchStatus } from "../state/patientSlice";
-import { selectDoctorFetchStatus } from "../state/doctorSlice";
 import axios from "axios";
 
 export function SplashScreen({ navigation }) {
   const token = useSelector(selectSessionToken);
-  const patientFetchStatus = useSelector(selectPatientFetchStatus);
-  const doctorFetchStatus = useSelector(selectDoctorFetchStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,19 +19,14 @@ export function SplashScreen({ navigation }) {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       navigation.navigate("Welcome");
     }
-  }, [dispatch, navigation, token, patientFetchStatus, doctorFetchStatus]);
+  }, [dispatch, navigation, token]);
 
-  console.log("En splash screen!");
+  console.log(`In splash screen!. session token:"${token}"`);
 
   return (
     <>
       <StatusBar style="light" />
-      <InnerContainer>
-        {(patientFetchStatus === "loading" ||
-          doctorFetchStatus === "loading") && (
-          <ActivityIndicator size="large" />
-        )}
-      </InnerContainer>
+      <InnerContainer></InnerContainer>
     </>
   );
 }
