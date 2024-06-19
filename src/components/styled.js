@@ -1,5 +1,9 @@
 import styled from "styled-components/native";
+
+/* eslint-disable no-unused-vars */
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+/* eslint-enable no-unused-vars */
+
 import Constants from "expo-constants";
 
 const StatusBarHeight = Constants.statusBarHeight;
