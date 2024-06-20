@@ -20,12 +20,14 @@ import {
   selectPatientFirstName,
   selectPatientEmail,
   fetchPatient,
+  resetPatientState,
 } from "../src/state/patientSlice";
 
 import {
   fetchDoctor,
   selectDoctorFetchError,
   selectDoctorFetchStatus,
+  resetDoctorState,
 } from "../src/state/doctorSlice";
 
 import {
@@ -62,6 +64,8 @@ export default function WelcomeScreen() {
 
   const handle_logout = () => {
     console.log("In welcome screen, logout!!");
+    dispatch(resetDoctorState());
+    dispatch(resetPatientState());
     dispatch(resetSessionState());
     router.replace("/login");
   };
