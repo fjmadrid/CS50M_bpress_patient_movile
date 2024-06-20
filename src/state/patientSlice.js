@@ -31,8 +31,8 @@ export const patientSlice = createSlice({
   name: "patient",
   initialState: initialPatientState,
   reducers: {
-    resetSessionState(state, action) {
-      state = initialPatientState;
+    resetPatientState(state, action) {
+      return initialPatientState;
     },
   },
   extraReducers(builder) {
