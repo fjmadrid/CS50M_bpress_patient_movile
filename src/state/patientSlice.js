@@ -17,7 +17,6 @@ export const initialPatientState = {
 export const fetchPatient = createAsyncThunk(
   "patient/fetch",
   async (credentials) => {
-    //const credentials = useSelector(selectSessionCredentials);
     console.log(
       `In patient slice, fetching patient data using credentials: ${JSON.stringify(
         credentials
@@ -31,7 +30,11 @@ export const fetchPatient = createAsyncThunk(
 export const patientSlice = createSlice({
   name: "patient",
   initialState: initialPatientState,
-  reducers: {},
+  reducers: {
+    resetSessionState(state, action) {
+      state = initialPatientState;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchPatient.pending, (state, action) => {
@@ -58,8 +61,6 @@ export const patientSlice = createSlice({
   },
 });
 
-// Selectors.
-
 export const selectPatientId = (state) => state.patient.data.id;
 export const selectPatientFirstName = (state) => state.patient.data.firstName;
 export const selectPatientLastName = (state) => state.patient.data.lastName;
@@ -69,5 +70,7 @@ export const selectPatientWeight = (state) => state.patient.data.weight;
 export const selectPatientHeight = (state) => state.patient.data.height;
 export const selectPatientFetchStatus = (state) => state.patient.status;
 export const selectPatientFetchError = (state) => state.patient.error;
+
+export const { resetPatientState } = patientSlice.actions;
 
 export default patientSlice.reducer;

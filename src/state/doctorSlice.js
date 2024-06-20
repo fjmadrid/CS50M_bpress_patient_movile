@@ -16,7 +16,11 @@ export const fetchDoctor = createAsyncThunk("doctor/fetch", async () => {
 export const doctorSlice = createSlice({
   name: "doctor",
   initialState: initialDoctorState,
-  reducers: {},
+  reducers: {
+    resetSessionState(state, action) {
+      state = initialDoctorState;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchDoctor.pending, (state, action) => {
@@ -40,13 +44,13 @@ export const doctorSlice = createSlice({
   },
 });
 
-// Selectors.
-
 export const selectDoctorId = (state) => state.doctor.data.id;
 export const selectDoctorFirstName = (state) => state.doctor.data.firstName;
 export const selectDoctorLastName = (state) => state.doctor.data.lastName;
 export const selectDoctorEmail = (state) => state.doctor.data.email;
 export const selectDoctorFetchStatus = (state) => state.doctor.status;
 export const selectDoctorFetchError = (state) => state.doctor.error;
+
+export const { resetDoctorState } = doctorSlice.actions;
 
 export default doctorSlice.reducer;
