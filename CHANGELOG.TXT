@@ -3,3 +3,5 @@
 - The "Sign up" screen only implements the UI without any interaction with the backend.
 - It is used a stack of react-navigation.
 - It is used react-redux to store information about session, patient and the assigned doctor.
+* 2.0
+- Transition to use expo router file structure.
