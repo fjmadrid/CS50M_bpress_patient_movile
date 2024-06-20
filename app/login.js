@@ -44,7 +44,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     if (loginStatus === "succeeded") {
-      router.navigate("Welcome");
+      router.navigate("/welcome");
     }
   }, [loginStatus]);
 
