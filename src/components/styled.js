@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 /* eslint-disable no-unused-vars */
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, Image, Pressable } from "react-native";
 /* eslint-enable no-unused-vars */
 
 import Constants from "expo-constants";
@@ -109,7 +109,7 @@ export const StyledInputLabel = styled.Text`
   text-align: left;
 `;
 
-export const StyledButton = styled.TouchableOpacity`
+export const StyledButton = styled.Pressable`
   padding: 15px;
   background-color: ${brand};
   justify-content: center;
@@ -144,7 +144,7 @@ export const LeftIcon = styled.View`
   z-index: 1;
 `;
 
-export const RightIcon = styled.TouchableOpacity`
+export const RightIcon = styled.Pressable`
   right: 15px;
   top: 38px;
   position: absolute;
@@ -177,7 +177,7 @@ export const ExtraText = styled.Text`
   color: ${tertiary};
 `;
 
-export const TextLink = styled.TouchableOpacity`
+export const TextLink = styled.Pressable`
   justify-content: center;
   align-items: center;
 `;
