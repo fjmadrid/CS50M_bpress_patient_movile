@@ -1,5 +1,5 @@
 * 1.0
-- It only implemented the Splash, Login, "Sign up" and Welcome screens.
-- The "sign up" screen only implements the UI without any interaction with the backend.
+- Only the "Splash", "Log in", "Sign up" and "Welcome" screens are implemented.
+- The "Sign up" screen only implements the UI without any interaction with the backend.
 - It is used a stack of react-navigation.
 - It is used react-redux to store information about session, patient and the assigned doctor.
