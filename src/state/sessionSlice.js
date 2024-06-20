@@ -20,11 +20,11 @@ export const signIn = createAsyncThunk(
 );
 
 export const sessionSlice = createSlice({
-  name: "patient",
+  name: "session",
   initialState: initialSessionState,
   reducers: {
     resetSessionState(state, action) {
-      state = initialSessionState;
+      return initialSessionState;
     },
     setSessionToken(state, action) {
       state.data.token = action.payload;
