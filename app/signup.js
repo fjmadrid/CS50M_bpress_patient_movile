@@ -68,8 +68,8 @@ export default function SignupScreen() {
               birthDate: "",
             }}
             onSubmit={(values) => {
-              console.log(`login with values: ${JSON.stringify(values)}`);
-              router.navigate("/welcome");
+              console.log(`Sign up with values: ${JSON.stringify(values)}`);
+              router.replace("/");
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (

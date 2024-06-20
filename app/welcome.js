@@ -63,7 +63,7 @@ export default function WelcomeScreen() {
   const handle_logout = () => {
     console.log("In welcome screen, logout!!");
     dispatch(resetSessionState());
-    router.navigate("/login");
+    router.replace("/login");
   };
 
   return (

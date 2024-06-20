@@ -44,7 +44,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     if (loginStatus === "succeeded") {
-      router.navigate("/welcome");
+      router.replace("/welcome");
     }
   }, [loginStatus]);
 
@@ -109,7 +109,7 @@ export default function LoginScreen() {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account yet?</ExtraText>
-                  <Link href="/signup" asChild>
+                  <Link replace href="/signup" asChild>
                     <TextLink>
                       <TextLinkContent>Sign up</TextLinkContent>
                     </TextLink>
