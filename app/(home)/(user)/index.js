@@ -89,7 +89,7 @@ export default function WelcomeScreen() {
             {patientFetchStatus === "succeeded" &&
               doctorFetchStatus === "succeeded" && (
                 <>
-                  <Link href="/home" asChild>
+                  <Link href="./details" asChild>
                     <Pressable>
                       <Avatar
                         resizeMode="cover"
