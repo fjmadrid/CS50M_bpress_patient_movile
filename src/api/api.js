@@ -20,6 +20,11 @@ export const api_fetchDoctor = () => {
   return axios.get(API_URL + "patient/doctor");
 };
 
+export const api_fetchMeasurements = (page = 1) => {
+  console.log(`In api, fetching measurements page ${page}`);
+  return axios.get(API_URL + `patient/measurement/?page=${page}`);
+};
+
 // export const login = async (credentials, setPatient, setDoctor) => {
 //   const resp1 = await axios.post(
 //     API_URL + "authentication/login/",
