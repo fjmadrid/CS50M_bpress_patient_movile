@@ -138,7 +138,7 @@ export default function SignupScreen() {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Already have an account?</ExtraText>
-                  <Link href="/login" asChild>
+                  <Link replace href="/login" asChild>
                     <TextLink>
                       <TextLinkContent>Sign in</TextLinkContent>
                     </TextLink>

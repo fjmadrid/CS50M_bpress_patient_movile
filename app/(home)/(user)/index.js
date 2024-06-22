@@ -11,7 +11,7 @@ import {
   PageSubtitle,
   Colors,
   MsgBox,
-} from "../src/components/styled";
+} from "../../../src/components/styled";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -21,19 +21,19 @@ import {
   selectPatientEmail,
   fetchPatient,
   resetPatientState,
-} from "../src/state/patientSlice";
+} from "../../../src/state/patientSlice";
 
 import {
   fetchDoctor,
   selectDoctorFetchError,
   selectDoctorFetchStatus,
   resetDoctorState,
-} from "../src/state/doctorSlice";
+} from "../../../src/state/doctorSlice";
 
 import {
   resetSessionState,
   selectSessionCredentials,
-} from "../src/state/sessionSlice";
+} from "../../../src/state/sessionSlice";
 
 import { Pressable, ActivityIndicator } from "react-native";
 import { useEffect } from "react";
@@ -76,7 +76,7 @@ export default function WelcomeScreen() {
       <InnerContainer>
         <WelcomeImage
           resizeMode="cover"
-          source={require("../assets/welcome.jpeg")}
+          source={require("../../../assets/welcome.jpeg")}
         />
         <WelcomeContainer>
           <StyledFormArea>
@@ -93,7 +93,7 @@ export default function WelcomeScreen() {
                     <Pressable>
                       <Avatar
                         resizeMode="cover"
-                        source={require("../assets/avatar.jpg")}
+                        source={require("../../../assets/avatar.jpg")}
                       />
                     </Pressable>
                   </Link>

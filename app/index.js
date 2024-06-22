@@ -13,7 +13,7 @@ export default function IndexScreen() {
   return (
     <>
       {token === "" && <Redirect href="/login" />}
-      {token !== "" && <Redirect href="/welcome" />}
+      {token !== "" && <Redirect href="/(home)" />}
     </>
   );
 }

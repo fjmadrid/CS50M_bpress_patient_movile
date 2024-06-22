@@ -44,7 +44,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     if (loginStatus === "succeeded") {
-      router.replace("/welcome");
+      router.replace("/(home)");
     }
   }, [loginStatus]);
 
