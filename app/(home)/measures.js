@@ -5,50 +5,88 @@ import {
   StyledButton,
   StyledButtonText,
   Line,
+  MsgBox,
 } from "../../src/components/styled";
 
-import { api_fetchMeasurements } from "../../src/api/api";
-
 import { Colors } from "../../src/components/styled";
-import { useState } from "react";
+import {
+  selectMeasurementsStatus,
+  selectMeasurementsError,
+  fetchMeasurements,
+  selectAllMeasurements,
+  selectMeasurementById,
+  selectMeasurementsIds,
+} from "../../src/state/measurementsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import {
+  Pressable,
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 
 const { primary } = Colors;
 
+const showDetail = (id) => {
+  console.log(`Show details for measurement id: ${id}`);
+};
+
+const Measurement = ({ id, showDetail }) => {
+  const item = useSelector((state) => selectMeasurementById(state, id));
+  return (
+    <Pressable
+      style={{
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: "lightgrey",
+      }}
+      onPress={() => showDetail(id)}
+    >
+      <View style={{ flexDirection: "row" }}>
+        <Text>{item.date.toLocaleString()}</Text>
+        <Text>{item.systolic}</Text>
+        <Text>{item.diastolic}</Text>
+        <Text>{item.ppm}</Text>
+        <Text>{item.observation}</Text>
+      </View>
+    </Pressable>
+  );
+};
+
 export default function MeasuresScreen() {
-  const [measurements, setMeasurements] = useState([]);
+  const measurementsStatus = useSelector(selectMeasurementsStatus);
+  const measurementsError = useSelector(selectMeasurementsError);
+  const measurementsIds = useSelector(selectMeasurementsIds);
+  const dispatch = useDispatch();
 
-  const fetchMeasurements = async () => {
-    let measurements = [];
-    let page = 1;
-    let resp = null;
-
-    try {
-      do {
-        resp = await api_fetchMeasurements(page);
-        console.log(`Response for page ${page}: `, JSON.stringify(resp));
-        if (resp.status === 200) {
-          measurements = measurements.concat(resp.data.results);
-          page = page + 1;
-        } else {
-          console.log(
-            "Error fetching patient measures.",
-            ` Response ${resp.status}: ${resp.error}`
-          );
-        }
-      } while (resp.data.next);
-    } catch (error) {
-      console.log(`Exception fetching patient measures: ${error}`);
-    }
-    setMeasurements(measurements);
-  };
-
-  useState(() => {
-    if (measurements.length === 0) fetchMeasurements();
-  }, [measurements]);
+  useEffect(() => {
+    if (measurementsIds.length === 0 && measurementsStatus === "idle")
+      dispatch(fetchMeasurements());
+  }, [dispatch, measurementsIds, measurementsStatus]);
 
   console.log(
-    `In measurements screen. Number of measurements is ${measurements.length}`
+    `In measurements screen. Number of measurements is ${measurementsIds.length}`
   );
+
+  let content = null;
+  if (measurementsStatus === "loading")
+    content = <ActivityIndicator size="large" />;
+  else if (measurementsStatus === "failed")
+    content = <MsgBox>{measurementsError}</MsgBox>;
+  else {
+    content = (
+      <FlatList
+        data={measurementsIds}
+        renderItem={({ item }) => (
+          <Measurement id={item} showDetail={showDetail} />
+        )}
+        keyExtractor={(item) => item}
+      />
+    );
+  }
+
   return (
     <StyledContainer>
       <InnerContainer>
@@ -58,6 +96,7 @@ export default function MeasuresScreen() {
           </StyledButtonText>
         </StyledButton>
         <Line />
+        {content}
       </InnerContainer>
     </StyledContainer>
   );
