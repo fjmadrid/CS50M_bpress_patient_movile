@@ -35,6 +35,8 @@ import {
   selectSessionCredentials,
 } from "../../../src/state/sessionSlice";
 
+import { resetMeasurements } from "../../../src/state/measurementsSlice";
+
 import { Pressable, ActivityIndicator } from "react-native";
 import { useEffect } from "react";
 import { router, Link } from "expo-router";
@@ -64,6 +66,7 @@ export default function WelcomeScreen() {
 
   const handle_logout = () => {
     console.log("In welcome screen, logout!!");
+    dispatch(resetMeasurements());
     dispatch(resetDoctorState());
     dispatch(resetPatientState());
     dispatch(resetSessionState());
