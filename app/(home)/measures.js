@@ -62,12 +62,14 @@ export default function MeasuresScreen() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (measurementsIds.length === 0 && measurementsStatus === "idle")
+    if (measurementsIds.length === 0 && measurementsStatus === "idle") {
+      console.log("Dispaching action to fetch measurements.");
       dispatch(fetchMeasurements());
+    }
   }, [dispatch, measurementsIds, measurementsStatus]);
 
   console.log(
-    `In measurements screen. Number of measurements is ${measurementsIds.length}`
+    `In measurements screen. Number of measurements is ${measurementsIds.length} Measurements status: ${measurementsStatus}`
   );
 
   let content = null;
