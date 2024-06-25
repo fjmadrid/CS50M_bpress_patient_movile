@@ -18,7 +18,8 @@ const initialState = measurementsAdapter.getInitialState({
 
 export const fetchMeasurements = createAsyncThunk(
   "measurements/fetch",
-  async ({ rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
+    console.log("In measurements slice, fetching data.");
     let measurements = [];
     try {
       let page = 1;
@@ -26,18 +27,18 @@ export const fetchMeasurements = createAsyncThunk(
       let someMore = false;
       do {
         resp = await api_fetchMeasurements(page);
-        const { Response, data, Error } = await resp.json();
         console.log(`Response for page ${page}: `, JSON.stringify(resp));
-        if (Response === "True") {
-          measurements = measurements.concat(data.measurements);
+        const { status, statusText, data } = resp;
+        if (status === 200) {
+          measurements = measurements.concat(data.results);
           page = page + 1;
           someMore = data.next !== null;
         } else {
           console.log(
             "Error fetching patient measures.",
-            ` Response ${resp.status}: ${resp.error}`
+            ` Response ${status}: ${statusText}`
           );
-          return rejectWithValue(Error);
+          return rejectWithValue(statusText);
         }
       } while (someMore);
     } catch (error) {
