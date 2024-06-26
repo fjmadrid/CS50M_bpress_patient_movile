@@ -25,6 +25,13 @@ export const api_fetchMeasurements = (page = 1) => {
   return axios.get(API_URL + `patient/measurement/?page=${page}`);
 };
 
+export const api_addNewMeasurement = (id, data) => {
+  console.log(
+    `In api, add new measurement ${JSON.stringify(data)} to patient id: ${id}`
+  );
+  return axios.put(API_URL + "patient/measurement/" + id + "/", data);
+};
+
 // export const login = async (credentials, setPatient, setDoctor) => {
 //   const resp1 = await axios.post(
 //     API_URL + "authentication/login/",

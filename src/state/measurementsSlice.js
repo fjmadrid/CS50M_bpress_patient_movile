@@ -4,7 +4,7 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 
-import { api_fetchMeasurements } from "../api/api";
+import { api_fetchMeasurements, api_addNewMeasurement } from "../api/api";
 
 const measurementsAdapter = createEntityAdapter({
   selectId: (instance) => instance.id,
@@ -49,6 +49,15 @@ export const fetchMeasurements = createAsyncThunk(
   }
 );
 
+export const addNewMeasurement = createAsyncThunk(
+  "measurements/add",
+  async ({ id, data }) => {
+    console.log("In measurements slice, add new measurement.");
+    const resp = await api_addNewMeasurement(id, data);
+    return resp;
+  }
+);
+
 const measurementsSlice = createSlice({
   name: "measurements",
   initialState,
@@ -67,6 +76,23 @@ const measurementsSlice = createSlice({
         measurementsAdapter.upsertMany(state, action.payload);
       })
       .addCase(fetchMeasurements.rejected, (state, action) => {
+        state.status = "failed";
+        if (action.payload) state.error = action.payload;
+        else state.error = action.error.message;
+      })
+      .addCase(addNewMeasurement.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(addNewMeasurement.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        console.log(
+          `In measurementsSlice. addNewMeasurement succeeded with action payload ${JSON.stringify(
+            action.payload
+          )}`
+        );
+        measurementsAdapter.addOne(state, action.payload);
+      })
+      .addCase(addNewMeasurement.rejected, (state, action) => {
         state.status = "failed";
         if (action.payload) state.error = action.payload;
         else state.error = action.error.message;
