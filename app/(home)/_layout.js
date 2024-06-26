@@ -24,7 +24,7 @@ export default function HomeLayout() {
         }}
       />
       <Tabs.Screen
-        name="measures"
+        name="(measurements)"
         options={{
           headerShown: false,
           title: "",

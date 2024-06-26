@@ -6,17 +6,16 @@ import {
   StyledButtonText,
   Line,
   MsgBox,
-} from "../../src/components/styled";
+} from "../../../src/components/styled";
 
-import { Colors } from "../../src/components/styled";
+import { Colors } from "../../../src/components/styled";
 import {
   selectMeasurementsStatus,
   selectMeasurementsError,
   fetchMeasurements,
-  selectAllMeasurements,
   selectMeasurementById,
   selectMeasurementsIds,
-} from "../../src/state/measurementsSlice";
+} from "../../../src/state/measurementsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -26,32 +25,36 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
+import { Link } from "expo-router";
 
 const { primary } = Colors;
-
-const showDetail = (id) => {
-  console.log(`Show details for measurement id: ${id}`);
-};
 
 const Measurement = ({ id, showDetail }) => {
   const item = useSelector((state) => selectMeasurementById(state, id));
   return (
-    <Pressable
-      style={{
-        marginTop: 10,
-        padding: 10,
-        backgroundColor: "lightgrey",
+    <Link
+      href={{
+        pathname: "./details/[id]",
+        params: { id: id },
       }}
-      onPress={() => showDetail(id)}
+      asChild
     >
-      <View style={{ flexDirection: "row" }}>
-        <Text>{item.date.toLocaleString()}</Text>
-        <Text>{item.systolic}</Text>
-        <Text>{item.diastolic}</Text>
-        <Text>{item.ppm}</Text>
-        <Text>{item.observation}</Text>
-      </View>
-    </Pressable>
+      <Pressable
+        style={{
+          marginTop: 10,
+          padding: 10,
+          backgroundColor: "lightgrey",
+        }}
+      >
+        <View style={{ flexDirection: "row" }}>
+          <Text>{item.date.toLocaleString()}</Text>
+          <Text>{item.systolic}</Text>
+          <Text>{item.diastolic}</Text>
+          <Text>{item.ppm}</Text>
+          <Text>{item.observation}</Text>
+        </View>
+      </Pressable>
+    </Link>
   );
 };
 
@@ -63,7 +66,7 @@ export default function MeasuresScreen() {
 
   useEffect(() => {
     if (measurementsIds.length === 0 && measurementsStatus === "idle") {
-      console.log("Dispaching action to fetch measurements.");
+      console.log("Dispatching action to fetch measurements.");
       dispatch(fetchMeasurements());
     }
   }, [dispatch, measurementsIds, measurementsStatus]);
@@ -81,9 +84,7 @@ export default function MeasuresScreen() {
     content = (
       <FlatList
         data={measurementsIds}
-        renderItem={({ item }) => (
-          <Measurement id={item} showDetail={showDetail} />
-        )}
+        renderItem={({ item }) => <Measurement id={item} />}
         keyExtractor={(item) => item}
       />
     );
