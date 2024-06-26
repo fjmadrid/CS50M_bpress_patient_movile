@@ -8,7 +8,7 @@ import { api_fetchMeasurements } from "../api/api";
 
 const measurementsAdapter = createEntityAdapter({
   selectId: (instance) => instance.id,
-  sortComparer: (a, b) => b.localeCompare(a),
+  sortComparer: (a, b) => b.date.localeCompare(a.date),
 });
 
 const initialState = measurementsAdapter.getInitialState({

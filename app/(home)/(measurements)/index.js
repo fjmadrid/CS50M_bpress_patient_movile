@@ -93,11 +93,13 @@ export default function MeasuresScreen() {
   return (
     <StyledContainer>
       <InnerContainer>
-        <StyledButton>
-          <StyledButtonText>
-            <FontAwesome size={32} color={primary} name="plus" />
-          </StyledButtonText>
-        </StyledButton>
+        <Link href="./add" asChild>
+          <StyledButton>
+            <StyledButtonText>
+              <FontAwesome size={32} color={primary} name="plus" />
+            </StyledButtonText>
+          </StyledButton>
+        </Link>
         <Line />
         {content}
       </InnerContainer>
