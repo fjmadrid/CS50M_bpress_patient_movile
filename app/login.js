@@ -66,7 +66,7 @@ export default function LoginScreen() {
         patientFetchStatus === "succeeded" &&
         doctorFetchStatus === "succeeded"
       )
-        router.replace("/(home)");
+        router.replace("/home");
     }
   }, [
     loginStatus,

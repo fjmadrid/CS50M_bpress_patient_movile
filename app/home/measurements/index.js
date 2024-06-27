@@ -34,7 +34,7 @@ const Measurement = ({ id, showDetail }) => {
   return (
     <Link
       href={{
-        pathname: "./details/[id]",
+        pathname: "/home/measurements/[id]",
         params: { id: id },
       }}
       asChild
@@ -93,7 +93,7 @@ export default function MeasuresScreen() {
   return (
     <StyledContainer>
       <InnerContainer>
-        <Link href="./add" asChild>
+        <Link href="/home/measurements/add" asChild>
           <StyledButton>
             <StyledButtonText>
               <FontAwesome size={32} color={primary} name="plus" />

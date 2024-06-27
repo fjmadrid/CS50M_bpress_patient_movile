@@ -17,19 +17,19 @@ import {
   StyledButton,
   StyledButtonText,
   MsgBox,
-} from "../../../../src/components/styled";
+} from "../../../src/components/styled";
 
 import {
   addNewMeasurement,
   selectMeasurementsError,
   selectMeasurementsStatus,
-} from "../../../../src/state/measurementsSlice";
+} from "../../../src/state/measurementsSlice";
 
-import { selectPatientId } from "../../../../src/state/patientSlice";
+import { selectPatientId } from "../../../src/state/patientSlice";
 
 import { Formik } from "formik";
 
-import KeyboardAvoidingWrapper from "../../../../src/components/KeyboardAvoidingWrapper";
+import KeyboardAvoidingWrapper from "../../../src/components/KeyboardAvoidingWrapper";
 
 import { router } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";

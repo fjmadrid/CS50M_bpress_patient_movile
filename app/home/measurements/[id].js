@@ -2,7 +2,7 @@ import {
   InnerContainer,
   MsgBox,
   StyledContainer,
-} from "../../../../src/components/styled";
+} from "../../../src/components/styled";
 
 import { useLocalSearchParams } from "expo-router";
 
