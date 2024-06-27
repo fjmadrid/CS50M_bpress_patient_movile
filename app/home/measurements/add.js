@@ -22,7 +22,7 @@ import {
 import {
   addNewMeasurement,
   selectMeasurementsError,
-  selectMeasurementsStatus,
+  selectMeasurementsAddStatus,
 } from "../../../src/state/measurementsSlice";
 
 import { selectPatientId } from "../../../src/state/patientSlice";
@@ -37,7 +37,7 @@ import { useDispatch, useSelector } from "react-redux";
 const { darkLight, brand } = Colors;
 
 export default function AddNewMeasurementScreen() {
-  const measurementsStatus = useSelector(selectMeasurementsStatus);
+  const measurementsAddStatus = useSelector(selectMeasurementsAddStatus);
   const measurementsError = useSelector(selectMeasurementsError);
   const patientId = useSelector(selectPatientId);
   const dispatch = useDispatch();
@@ -46,8 +46,8 @@ export default function AddNewMeasurementScreen() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    if (measurementsStatus === "succeeded") router.back();
-  }, [measurementsStatus]);
+    if (measurementsAddStatus === "succeeded") router.back();
+  }, [measurementsAddStatus]);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -64,10 +64,17 @@ export default function AddNewMeasurementScreen() {
     setShowTimePicker(true);
   };
 
+  console.log(
+    "In add new measurement screen. ",
+    `measurementAddStatus:${measurementsAddStatus}`
+  );
+
   return (
     <>
-      {measurementsStatus === "loading" && <ActivityIndicator size="large" />}
-      {measurementsStatus !== "loading" && (
+      {measurementsAddStatus === "loading" && (
+        <ActivityIndicator size="large" />
+      )}
+      {measurementsAddStatus !== "loading" && (
         <KeyboardAvoidingWrapper>
           <StyledContainer>
             <InnerContainer>

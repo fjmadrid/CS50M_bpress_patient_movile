@@ -13,6 +13,7 @@ const measurementsAdapter = createEntityAdapter({
 
 const initialState = measurementsAdapter.getInitialState({
   status: "idle",
+  addStatus: "idle",
   error: null,
 });
 
@@ -81,10 +82,10 @@ const measurementsSlice = createSlice({
         else state.error = action.error.message;
       })
       .addCase(addNewMeasurement.pending, (state, action) => {
-        state.status = "loading";
+        state.addStatus = "loading";
       })
       .addCase(addNewMeasurement.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.addStatus = "succeeded";
         console.log(
           `In measurementsSlice. addNewMeasurement succeeded with action payload ${JSON.stringify(
             action.payload
@@ -93,7 +94,7 @@ const measurementsSlice = createSlice({
         measurementsAdapter.addOne(state, action.payload);
       })
       .addCase(addNewMeasurement.rejected, (state, action) => {
-        state.status = "failed";
+        state.addStatus = "failed";
         if (action.payload) state.error = action.payload;
         else state.error = action.error.message;
       });
@@ -104,6 +105,10 @@ export default measurementsSlice.reducer;
 
 export const selectMeasurementsStatus = (state) => {
   return state.measurements.status;
+};
+
+export const selectMeasurementsAddStatus = (state) => {
+  return state.measurements.addStatus;
 };
 
 export const selectMeasurementsError = (state) => {
