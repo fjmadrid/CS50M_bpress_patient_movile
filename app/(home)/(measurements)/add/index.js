@@ -39,7 +39,7 @@ const { darkLight, brand } = Colors;
 export default function AddNewMeasurementScreen() {
   const measurementsStatus = useSelector(selectMeasurementsStatus);
   const measurementsError = useSelector(selectMeasurementsError);
-  const patientId = useSelector(selectPatientId());
+  const patientId = useSelector(selectPatientId);
   const dispatch = useDispatch();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
