@@ -113,7 +113,7 @@ export default function AddNewMeasurementScreen() {
                       values
                     )}`
                   );
-                  dispatch(addNewMeasurement({ id: patientId, data: values }));
+                  dispatch(addNewMeasurement(values));
                 }}
               >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (

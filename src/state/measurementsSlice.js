@@ -52,10 +52,21 @@ export const fetchMeasurements = createAsyncThunk(
 
 export const addNewMeasurement = createAsyncThunk(
   "measurements/add",
-  async ({ id, data }) => {
-    console.log("In measurements slice, add new measurement.");
-    const resp = await api_addNewMeasurement(id, data);
-    return resp;
+  async (values, { rejectWithValue }) => {
+    console.log(
+      `In measurements slice, add new measurement: ${JSON.stringify(values)}.`
+    );
+    const resp = await api_addNewMeasurement(values);
+    console.log(`Response ${JSON.stringify(resp)}`);
+    const { status, statusText, data } = resp;
+    if (status !== 201) {
+      console.log(
+        "Error adding new measurement.",
+        ` Response ${status}: ${statusText}`
+      );
+      return rejectWithValue(statusText);
+    }
+    return data;
   }
 );
 
