@@ -77,6 +77,9 @@ const measurementsSlice = createSlice({
     resetMeasurements(state, action) {
       return initialState;
     },
+    resetAddStatus(state, action) {
+      state.addStatus = "idle";
+    },
   },
   extraReducers(builder) {
     builder
@@ -126,7 +129,7 @@ export const selectMeasurementsError = (state) => {
   return state.measurements.error;
 };
 
-export const { resetMeasurements } = measurementsSlice.actions;
+export const { resetMeasurements, resetAddStatus } = measurementsSlice.actions;
 
 export const {
   selectAll: selectAllMeasurements,
