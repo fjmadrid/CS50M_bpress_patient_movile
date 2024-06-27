@@ -30,7 +30,18 @@ import {
   setSessionCredentials,
   selectSessionLoginStatus,
   selectSessionLoginError,
+  selectSessionCredentials,
 } from "../src/state/sessionSlice";
+import {
+  selectPatientFetchStatus,
+  selectPatientFetchError,
+  fetchPatient,
+} from "../src/state/patientSlice";
+import {
+  selectDoctorFetchStatus,
+  selectDoctorFetchError,
+  fetchDoctor,
+} from "../src/state/doctorSlice";
 
 import { router, Link } from "expo-router";
 
@@ -40,13 +51,30 @@ export default function LoginScreen() {
   const [hidePassword, setHidePassword] = useState(true);
   const loginStatus = useSelector(selectSessionLoginStatus);
   const loginError = useSelector(selectSessionLoginError);
+  const patientFetchStatus = useSelector(selectPatientFetchStatus);
+  const patientFetchError = useSelector(selectPatientFetchError);
+  const doctorFetchStatus = useSelector(selectDoctorFetchStatus);
+  const doctorFetchError = useSelector(selectDoctorFetchError);
+  const credentials = useSelector(selectSessionCredentials);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (loginStatus === "succeeded") {
-      router.replace("/(home)");
+      if (patientFetchStatus === "idle") dispatch(fetchPatient(credentials));
+      if (doctorFetchStatus === "idle") dispatch(fetchDoctor());
+      if (
+        patientFetchStatus === "succeeded" &&
+        doctorFetchStatus === "succeeded"
+      )
+        router.replace("/(home)");
     }
-  }, [loginStatus]);
+  }, [
+    loginStatus,
+    credentials,
+    patientFetchStatus,
+    doctorFetchStatus,
+    dispatch,
+  ]);
 
   console.log(`In login screen. Login status:${loginStatus}`);
 
@@ -90,6 +118,12 @@ export default function LoginScreen() {
                   setHidePassword={setHidePassword}
                 />
                 {loginStatus === "failed" && <MsgBox>{loginError}</MsgBox>}
+                {patientFetchStatus === "failed" && (
+                  <MsgBox>{patientFetchError}</MsgBox>
+                )}
+                {doctorFetchStatus === "failed" && (
+                  <MsgBox>{doctorFetchError}</MsgBox>
+                )}
                 {loginStatus !== "loading" && (
                   <StyledButton onPress={handleSubmit}>
                     <StyledButtonText>Login</StyledButtonText>
