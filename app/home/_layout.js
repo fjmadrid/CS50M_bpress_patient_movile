@@ -7,14 +7,14 @@ const { brand, brandLight } = Colors;
 export default function HomeLayout() {
   return (
     <Tabs
-      initialRouteName="(user)"
+      initialRouteName="measurements"
       screenOptions={{
         tabBarActiveTintColor: brand,
         tabBarInactiveTintColor: brandLight,
       }}
     >
       <Tabs.Screen
-        name="(user)"
+        name="user"
         options={{
           headerShown: false,
           title: "",
