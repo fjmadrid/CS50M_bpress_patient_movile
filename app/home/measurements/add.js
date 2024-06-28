@@ -12,7 +12,10 @@ import {
   StyledButton,
   StyledButtonText,
   MsgBox,
+  LeftIcon,
 } from "../../../src/components/styled";
+
+import { FontAwesome6 } from "@expo/vector-icons";
 
 import { addNewMeasurement } from "../../../src/state/measurementsSlice";
 
@@ -24,7 +27,7 @@ import { router } from "expo-router";
 import { useDispatch } from "react-redux";
 import { api_addNewMeasurement } from "../../../src/api/api";
 
-const { darkLight } = Colors;
+const { darkLight, brand } = Colors;
 
 export default function AddNewMeasurementScreen() {
   const [addStatus, setAddStatus] = useState("idle");
@@ -134,6 +137,7 @@ export default function AddNewMeasurementScreen() {
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                   <StyledFormArea>
                     <MyTextInput
+                      icon="chevron-up"
                       label="Systolic pressure"
                       placeholder="120"
                       placeholderTextColor={darkLight}
@@ -143,6 +147,7 @@ export default function AddNewMeasurementScreen() {
                       keyboardType="numeric"
                     />
                     <MyTextInput
+                      icon="chevron-up"
                       label="Diastolic pressure"
                       placeholder="70"
                       placeholderTextColor={darkLight}
@@ -152,6 +157,7 @@ export default function AddNewMeasurementScreen() {
                       keyboardType="numeric"
                     />
                     <MyTextInput
+                      icon="heart-pulse"
                       label="Pulses per minute"
                       placeholder="70"
                       placeholderTextColor={darkLight}
@@ -161,6 +167,7 @@ export default function AddNewMeasurementScreen() {
                       keyboardType="numeric"
                     />
                     <MyTextInput
+                      icon="calendar-days"
                       label="Date"
                       placeholder="YYYY - MM - DD"
                       placeholderTextColor={darkLight}
@@ -172,6 +179,7 @@ export default function AddNewMeasurementScreen() {
                       activateDateTimePicker={activateDatePicker}
                     />
                     <MyTextInput
+                      icon="clock"
                       label="Time"
                       placeholder="HH : MM"
                       placeholderTextColor={darkLight}
@@ -183,6 +191,7 @@ export default function AddNewMeasurementScreen() {
                       activateDateTimePicker={activateTimePicker}
                     />
                     <MyTextInput
+                      icon="pencil"
                       label="Observation"
                       placeholder="Write down any observation here."
                       placeholderTextColor={darkLight}
@@ -209,6 +218,7 @@ export default function AddNewMeasurementScreen() {
 }
 
 const MyTextInput = ({
+  icon,
   label,
   isDateTime,
   activateDateTimePicker,
@@ -216,6 +226,9 @@ const MyTextInput = ({
 }) => {
   return (
     <View>
+      <LeftIcon>
+        <FontAwesome6 name={icon} size={30} color={brand} />
+      </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
       {!isDateTime && <StyledTextInput {...props} />}
       {isDateTime && (
