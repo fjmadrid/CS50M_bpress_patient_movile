@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  Pressable,
-  ActivityIndicator,
-} from "react-native";
+import { View, Pressable, ActivityIndicator } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import {
@@ -19,35 +14,57 @@ import {
   MsgBox,
 } from "../../../src/components/styled";
 
-import {
-  addNewMeasurement,
-  selectMeasurementsError,
-  selectMeasurementsAddStatus,
-} from "../../../src/state/measurementsSlice";
-
-import { selectPatientId } from "../../../src/state/patientSlice";
+import { addNewMeasurement } from "../../../src/state/measurementsSlice";
 
 import { Formik } from "formik";
 
 import KeyboardAvoidingWrapper from "../../../src/components/KeyboardAvoidingWrapper";
 
 import { router } from "expo-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { api_addNewMeasurement } from "../../../src/api/api";
 
-const { darkLight, brand } = Colors;
+const { darkLight } = Colors;
 
 export default function AddNewMeasurementScreen() {
-  const measurementsAddStatus = useSelector(selectMeasurementsAddStatus);
-  const measurementsError = useSelector(selectMeasurementsError);
-  const patientId = useSelector(selectPatientId);
+  const [addStatus, setAddStatus] = useState("idle");
+  const [addError, setAddError] = useState("");
   const dispatch = useDispatch();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    if (measurementsAddStatus === "succeeded") router.back();
-  }, [measurementsAddStatus]);
+    if (addStatus === "succeeded") router.back();
+  }, [addStatus]);
+
+  const handleAddNewMeasurement = async (values) => {
+    if (addStatus !== "pending") {
+      console.log(
+        `In measurements slice, add new measurement: ${JSON.stringify(values)}.`
+      );
+      setAddStatus("pending");
+      try {
+        const resp = await api_addNewMeasurement(values);
+        console.log(`Response ${JSON.stringify(resp)}`);
+        const { status, statusText, data } = resp;
+        if (status !== 201) {
+          console.log(
+            "Error adding new measurement. ",
+            `Response ${status}: ${statusText}`
+          );
+          setAddError(`Response ${status}: ${statusText}`);
+          setAddStatus("failed");
+        } else {
+          dispatch(addNewMeasurement(data));
+          setAddStatus("succeeded");
+        }
+      } catch (err) {
+        setAddStatus("failed");
+        setAddError(err);
+      }
+    }
+  };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -66,15 +83,13 @@ export default function AddNewMeasurementScreen() {
 
   console.log(
     "In add new measurement screen. ",
-    `measurementAddStatus:${measurementsAddStatus}`
+    `measurementAddStatus:${addStatus}`
   );
 
   return (
     <>
-      {measurementsAddStatus === "loading" && (
-        <ActivityIndicator size="large" />
-      )}
-      {measurementsAddStatus !== "loading" && (
+      {addStatus === "pending" && <ActivityIndicator size="large" />}
+      {addStatus !== "pending" && (
         <KeyboardAvoidingWrapper>
           <StyledContainer>
             <InnerContainer>
@@ -113,7 +128,7 @@ export default function AddNewMeasurementScreen() {
                       values
                     )}`
                   );
-                  dispatch(addNewMeasurement(values));
+                  handleAddNewMeasurement(values);
                 }}
               >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -178,7 +193,7 @@ export default function AddNewMeasurementScreen() {
                       numberOfLines={5}
                       activateDateTimePicker={activateTimePicker}
                     />
-                    <MsgBox>{measurementsError}</MsgBox>
+                    {addError !== "" && <MsgBox>{addError}</MsgBox>}
                     <StyledButton onPress={handleSubmit}>
                       <StyledButtonText>Add new measurement</StyledButtonText>
                     </StyledButton>

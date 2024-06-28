@@ -13,7 +13,6 @@ const measurementsAdapter = createEntityAdapter({
 
 const initialState = measurementsAdapter.getInitialState({
   status: "idle",
-  addStatus: "idle",
   error: null,
 });
 
@@ -50,26 +49,6 @@ export const fetchMeasurements = createAsyncThunk(
   }
 );
 
-export const addNewMeasurement = createAsyncThunk(
-  "measurements/add",
-  async (values, { rejectWithValue }) => {
-    console.log(
-      `In measurements slice, add new measurement: ${JSON.stringify(values)}.`
-    );
-    const resp = await api_addNewMeasurement(values);
-    console.log(`Response ${JSON.stringify(resp)}`);
-    const { status, statusText, data } = resp;
-    if (status !== 201) {
-      console.log(
-        "Error adding new measurement.",
-        ` Response ${status}: ${statusText}`
-      );
-      return rejectWithValue(statusText);
-    }
-    return data;
-  }
-);
-
 const measurementsSlice = createSlice({
   name: "measurements",
   initialState,
@@ -77,8 +56,8 @@ const measurementsSlice = createSlice({
     resetMeasurements(state, action) {
       return initialState;
     },
-    resetAddStatus(state, action) {
-      state.addStatus = "idle";
+    addNewMeasurement(state, action) {
+      measurementsAdapter.addOne(state, action.payload);
     },
   },
   extraReducers(builder) {
@@ -92,23 +71,6 @@ const measurementsSlice = createSlice({
       })
       .addCase(fetchMeasurements.rejected, (state, action) => {
         state.status = "failed";
-        if (action.payload) state.error = action.payload;
-        else state.error = action.error.message;
-      })
-      .addCase(addNewMeasurement.pending, (state, action) => {
-        state.addStatus = "loading";
-      })
-      .addCase(addNewMeasurement.fulfilled, (state, action) => {
-        state.addStatus = "succeeded";
-        console.log(
-          `In measurementsSlice. addNewMeasurement succeeded with action payload ${JSON.stringify(
-            action.payload
-          )}`
-        );
-        measurementsAdapter.addOne(state, action.payload);
-      })
-      .addCase(addNewMeasurement.rejected, (state, action) => {
-        state.addStatus = "failed";
         if (action.payload) state.error = action.payload;
         else state.error = action.error.message;
       });
@@ -129,7 +91,8 @@ export const selectMeasurementsError = (state) => {
   return state.measurements.error;
 };
 
-export const { resetMeasurements, resetAddStatus } = measurementsSlice.actions;
+export const { resetMeasurements, resetAddStatus, addNewMeasurement } =
+  measurementsSlice.actions;
 
 export const {
   selectAll: selectAllMeasurements,
