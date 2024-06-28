@@ -4,7 +4,11 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 
-import { api_fetchMeasurements, api_addNewMeasurement } from "../api/api";
+import {
+  api_fetchMeasurements,
+  api_addNewMeasurement,
+  api_editMeasurement,
+} from "../api/api";
 
 const measurementsAdapter = createEntityAdapter({
   selectId: (instance) => instance.id,
@@ -59,6 +63,9 @@ const measurementsSlice = createSlice({
     addNewMeasurement(state, action) {
       measurementsAdapter.addOne(state, action.payload);
     },
+    editMeasurement(state, action) {
+      measurementsAdapter.setOne(state, action.payload);
+    },
   },
   extraReducers(builder) {
     builder
@@ -91,8 +98,12 @@ export const selectMeasurementsError = (state) => {
   return state.measurements.error;
 };
 
-export const { resetMeasurements, resetAddStatus, addNewMeasurement } =
-  measurementsSlice.actions;
+export const {
+  resetMeasurements,
+  resetAddStatus,
+  addNewMeasurement,
+  editMeasurement,
+} = measurementsSlice.actions;
 
 export const {
   selectAll: selectAllMeasurements,
