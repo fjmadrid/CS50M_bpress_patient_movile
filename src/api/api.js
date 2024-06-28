@@ -30,6 +30,11 @@ export const api_addNewMeasurement = (data) => {
   return axios.post(API_URL + "patient/measurement/", data);
 };
 
+export const api_editMeasurement = (data) => {
+  console.log(`In api, edit measurement ${JSON.stringify(data)}`);
+  return axios.put(API_URL + `patient/measurement/${data.id}/`, data);
+};
+
 // export const login = async (credentials, setPatient, setDoctor) => {
 //   const resp1 = await axios.post(
 //     API_URL + "authentication/login/",
