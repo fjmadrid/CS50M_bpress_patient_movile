@@ -13,3 +13,5 @@
 
 - Sustituir Expo DateTimePicker por 'react native paper dates' que es compatible con todas las plataformas. Ver documentación en [https://www.reactnativepaperdates.com/]
 - El formulario de login funciona en el móvil pero no en la versión web... Los textimput pierden el foco continuamente y puede ser porque se monta y desmonta el componente, una posible solución está en este hilo [https://stackoverflow.com/questions/60467604/input-fields-lose-focus-on-each-value-change-in-a-complex-formik-form]
+- Hacer que todos los iconos sean de la librearía FontAwesome6.
+- Hacer que MyTextInput un componente a reutilizar en vez de definirlo allí donde se usa (add, login, sigingup ...)
