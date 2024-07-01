@@ -26,6 +26,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Link } from "expo-router";
+import Dayjs from "dayjs";
 
 const { primary } = Colors;
 
@@ -41,17 +42,22 @@ const Measurement = ({ id, showDetail }) => {
     >
       <Pressable
         style={{
+          width: "100%",
           marginTop: 10,
           padding: 10,
           backgroundColor: "lightgrey",
         }}
       >
-        <View style={{ flexDirection: "row" }}>
-          <Text>{item.date.toLocaleString()}</Text>
-          <Text>{item.systolic}</Text>
-          <Text>{item.diastolic}</Text>
-          <Text>{item.ppm}</Text>
-          <Text>{item.observation}</Text>
+        <View style={{ width: "100%" }}>
+          <View style={{ width: 200 }}>
+            <Text>{Dayjs(item.date).format("YYYY-MM-DD")}</Text>
+          </View>
+          <View style={{ width: "100%", flexDirection: "row" }}>
+            <Text>{item.systolic}</Text>
+            <Text>{item.diastolic}</Text>
+            <Text>{item.ppm}</Text>
+            <Text>{item.observation}</Text>
+          </View>
         </View>
       </Pressable>
     </Link>
