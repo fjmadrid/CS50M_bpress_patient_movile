@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
+    "dayjs": "^1.11.11",
     "expo": "~51.0.10",
     "expo-constants": "~16.0.2",
     "expo-linking": "~6.3.1",
