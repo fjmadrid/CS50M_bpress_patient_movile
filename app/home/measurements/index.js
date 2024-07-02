@@ -27,6 +27,7 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import Dayjs from "dayjs";
+import Moment from "react-moment";
 
 const { primary } = Colors;
 
@@ -50,9 +51,10 @@ const Measurement = ({ id, showDetail }) => {
       >
         <View style={{ width: "100%" }}>
           <View style={{ alignItems: "flex-end" }}>
-            <Text style={{ textAlign: "right" }}>
+            {/* <Text style={{ textAlign: "right" }}>
               {Dayjs(item.date).format("YYYY-MM-DD")}
-            </Text>
+            </Text> */}
+            <Moment fromNow>{item.date.toString()}</Moment>
           </View>
           <View style={{ width: "100%", flexDirection: "row" }}>
             <Text>HIGH:</Text>{" "}
