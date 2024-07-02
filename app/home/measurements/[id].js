@@ -207,7 +207,7 @@ export default function DetailsMeasurementScreen() {
                       placeholderTextColor={darkLight}
                       onChangeText={handleChange("observation")}
                       onBlur={handleBlur("observation")}
-                      value={values.observation}
+                      value={values.observation ? values.observation : ""}
                       multiline={true}
                       numberOfLines={5}
                       activateDateTimePicker={activateTimePicker}
