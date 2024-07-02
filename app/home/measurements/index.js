@@ -28,11 +28,13 @@ import {
 import { Link } from "expo-router";
 import Dayjs from "dayjs";
 import Moment from "react-moment";
+import moment from "moment";
 
-const { primary } = Colors;
+const { primary, brand } = Colors;
 
 const Measurement = ({ id, showDetail }) => {
   const item = useSelector((state) => selectMeasurementById(state, id));
+  const dateStr = moment(item.date).fromNow();
   return (
     <Link
       href={{
@@ -41,20 +43,20 @@ const Measurement = ({ id, showDetail }) => {
       }}
       asChild
     >
-      <Pressable
-        style={{
-          width: "100%",
-          marginTop: 10,
-          padding: 10,
-          backgroundColor: "lightgrey",
-        }}
-      >
-        <View style={{ width: "100%" }}>
+      <Pressable>
+        <View
+          style={{
+            width: "100%",
+            marginTop: 10,
+            padding: 10,
+            backgroundColor: "beige",
+            borderColor: brand,
+            borderWidth: 2,
+            borderRadius: 10,
+          }}
+        >
           <View style={{ alignItems: "flex-end" }}>
-            {/* <Text style={{ textAlign: "right" }}>
-              {Dayjs(item.date).format("YYYY-MM-DD")}
-            </Text> */}
-            <Moment fromNow>{item.date.toString()}</Moment>
+            <Text>{dateStr}</Text>
           </View>
           <View style={{ width: "100%", flexDirection: "row" }}>
             <Text>{"HIGH:"}</Text>
