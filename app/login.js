@@ -117,23 +117,25 @@ export default function LoginScreen() {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                {loginStatus === "failed" && <MsgBox>{loginError}</MsgBox>}
-                {patientFetchStatus === "failed" && (
+                {loginStatus === "failed" ? (
+                  <MsgBox>{loginError}</MsgBox>
+                ) : null}
+                {patientFetchStatus === "failed" ? (
                   <MsgBox>{patientFetchError}</MsgBox>
-                )}
-                {doctorFetchStatus === "failed" && (
+                ) : null}
+                {doctorFetchStatus === "failed" ? (
                   <MsgBox>{doctorFetchError}</MsgBox>
-                )}
-                {loginStatus !== "loading" && (
+                ) : null}
+                {loginStatus !== "loading" ? (
                   <StyledButton onPress={handleSubmit}>
                     <StyledButtonText>Login</StyledButtonText>
                   </StyledButton>
-                )}
-                {loginStatus === "loading" && (
+                ) : null}
+                {loginStatus === "loading" ? (
                   <StyledButton disabled={true}>
                     <ActivityIndicator size="large" color={primary} />
                   </StyledButton>
-                )}
+                ) : null}
                 <Line />
                 <StyledButton google={true} onPress={handleSubmit}>
                   <Fontisto name="google" color={primary} size={25} />
@@ -173,7 +175,7 @@ const MyTextInput = ({
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
       <StyledTextInput {...props} />
-      {isPassword && (
+      {isPassword ? (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
             name={hidePassword ? "eye-off" : "eye"}
@@ -181,7 +183,7 @@ const MyTextInput = ({
             color={darkLight}
           />
         </RightIcon>
-      )}
+      ) : null}
     </View>
   );
 };

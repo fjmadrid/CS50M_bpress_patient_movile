@@ -100,12 +100,12 @@ export default function DetailsMeasurementScreen() {
 
   return (
     <>
-      {editStatus === "pending" && <ActivityIndicator size="large" />}
-      {editStatus !== "pending" && (
+      {editStatus === "pending" ? <ActivityIndicator size="large" /> : null}
+      {editStatus !== "pending" ? (
         <KeyboardAvoidingWrapper>
           <StyledContainer>
             <InnerContainer>
-              {showDatePicker && (
+              {showDatePicker ? (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={date}
@@ -114,8 +114,8 @@ export default function DetailsMeasurementScreen() {
                   display="default"
                   onChange={onChange}
                 />
-              )}
-              {showTimePicker && (
+              ) : null}
+              {showTimePicker ? (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={date}
@@ -124,7 +124,7 @@ export default function DetailsMeasurementScreen() {
                   display="default"
                   onChange={onChange}
                 />
-              )}
+              ) : null}
               <Formik
                 initialValues={{ ...measurementValues }}
                 onSubmit={(values) => {
@@ -213,14 +213,14 @@ export default function DetailsMeasurementScreen() {
                       activateDateTimePicker={activateTimePicker}
                       editable={editing}
                     />
-                    {editError !== "" && <MsgBox>{editError}</MsgBox>}
+                    {editError !== "" ? <MsgBox>{editError}</MsgBox> : null}
                     <StyledButton onPress={handleSubmit}>
-                      {editing && (
+                      {editing ? (
                         <StyledButtonText>Save modifications</StyledButtonText>
-                      )}
-                      {!editing && (
+                      ) : null}
+                      {!editing ? (
                         <StyledButtonText>Edit measurement</StyledButtonText>
-                      )}
+                      ) : null}
                     </StyledButton>
                   </StyledFormArea>
                 )}
@@ -228,7 +228,7 @@ export default function DetailsMeasurementScreen() {
             </InnerContainer>
           </StyledContainer>
         </KeyboardAvoidingWrapper>
-      )}
+      ) : null}
     </>
   );
 }
@@ -246,12 +246,12 @@ const MyTextInput = ({
         <FontAwesome6 name={icon} size={30} color={brand} />
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
-      {!isDateTime && <StyledTextInput {...props} />}
-      {isDateTime && (
+      {!isDateTime ? <StyledTextInput {...props} /> : null}
+      {isDateTime ? (
         <Pressable onPress={activateDateTimePicker}>
           <StyledTextInput {...props} />
         </Pressable>
-      )}
+      ) : null}
     </View>
   );
 };

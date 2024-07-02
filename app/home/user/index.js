@@ -83,14 +83,14 @@ export default function WelcomeScreen() {
         />
         <WelcomeContainer>
           <StyledFormArea>
-            {patientFetchStatus === "failed" && (
+            {patientFetchStatus === "failed" ? (
               <MsgBox>Error fetching patient data: {patientFetchError}</MsgBox>
-            )}
-            {doctorFetchStatus === "failed" && (
+            ) : null}
+            {doctorFetchStatus === "failed" ? (
               <MsgBox>Error fetching doctor data: {doctorFetchError}</MsgBox>
-            )}
-            {patientFetchStatus === "succeeded" &&
-              doctorFetchStatus === "succeeded" && (
+            ) : null}
+            {patientFetchStatus === "succeeded" ? (
+              doctorFetchStatus === "succeeded" ? (
                 <>
                   <Link href="/home/user/details" asChild>
                     <Pressable>
@@ -103,11 +103,12 @@ export default function WelcomeScreen() {
                   <PageSubtitle welcome={true}>{patientFirstName}</PageSubtitle>
                   <PageSubtitle welcome={true}>{patientEmail}</PageSubtitle>
                 </>
-              )}
-            {(patientFetchStatus === "loading" ||
-              doctorFetchStatus === "loading") && (
+              ) : null
+            ) : null}
+            {patientFetchStatus === "loading" ||
+            doctorFetchStatus === "loading" ? (
               <ActivityIndicator size="large" color={brand} />
-            )}
+            ) : null}
             <Line />
             <StyledButton onPress={handle_logout}>
               <StyledButtonText>Logout</StyledButtonText>

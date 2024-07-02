@@ -91,12 +91,12 @@ export default function AddNewMeasurementScreen() {
 
   return (
     <>
-      {addStatus === "pending" && <ActivityIndicator size="large" />}
-      {addStatus !== "pending" && (
+      {addStatus === "pending" ? <ActivityIndicator size="large" /> : null}
+      {addStatus !== "pending" ? (
         <KeyboardAvoidingWrapper>
           <StyledContainer>
             <InnerContainer>
-              {showDatePicker && (
+              {showDatePicker ? (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={date}
@@ -105,8 +105,8 @@ export default function AddNewMeasurementScreen() {
                   display="default"
                   onChange={onChange}
                 />
-              )}
-              {showTimePicker && (
+              ) : null}
+              {showTimePicker ? (
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={date}
@@ -115,7 +115,7 @@ export default function AddNewMeasurementScreen() {
                   display="default"
                   onChange={onChange}
                 />
-              )}
+              ) : null}
               <Formik
                 initialValues={{
                   systolic: "",
@@ -202,7 +202,7 @@ export default function AddNewMeasurementScreen() {
                       numberOfLines={5}
                       activateDateTimePicker={activateTimePicker}
                     />
-                    {addError !== "" && <MsgBox>{addError}</MsgBox>}
+                    {addError !== "" ? <MsgBox>{addError}</MsgBox> : null}
                     <StyledButton onPress={handleSubmit}>
                       <StyledButtonText>Add new measurement</StyledButtonText>
                     </StyledButton>
@@ -212,7 +212,7 @@ export default function AddNewMeasurementScreen() {
             </InnerContainer>
           </StyledContainer>
         </KeyboardAvoidingWrapper>
-      )}
+      ) : null}
     </>
   );
 }
@@ -230,12 +230,12 @@ const MyTextInput = ({
         <FontAwesome6 name={icon} size={30} color={brand} />
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
-      {!isDateTime && <StyledTextInput {...props} />}
-      {isDateTime && (
+      {!isDateTime ? <StyledTextInput {...props} /> : null}
+      {isDateTime ? (
         <Pressable onPress={activateDateTimePicker}>
           <StyledTextInput {...props} />
         </Pressable>
-      )}
+      ) : null}
     </View>
   );
 };

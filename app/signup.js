@@ -49,7 +49,7 @@ export default function SignupScreen() {
     <KeyboardAvoidingWrapper>
       <StyledContainer>
         <InnerContainer>
-          {showDateTimePicker && (
+          {showDateTimePicker ? (
             <DateTimePicker
               testID="dateTimePicker"
               value={date}
@@ -58,7 +58,7 @@ export default function SignupScreen() {
               display="default"
               onChange={onChange}
             />
-          )}
+          ) : null}
           <Formik
             initialValues={{
               fullName: "",
@@ -169,13 +169,13 @@ const MyTextInput = ({
         <Octicons name={icon} size={30} color={brand} />
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
-      {!isDate && <StyledTextInput {...props} />}
-      {isDate && (
+      {!isDate ? <StyledTextInput {...props} /> : null}
+      {isDate ? (
         <TouchableOpacity onPress={showDatePicker}>
           <StyledTextInput {...props} />
         </TouchableOpacity>
-      )}
-      {isPassword && (
+      ) : null}
+      {isPassword ? (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
             name={hidePassword ? "eye-off" : "eye"}
@@ -183,7 +183,7 @@ const MyTextInput = ({
             color={darkLight}
           />
         </RightIcon>
-      )}
+      ) : null}
     </View>
   );
 };

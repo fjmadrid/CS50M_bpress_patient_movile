@@ -12,8 +12,8 @@ export default function IndexScreen() {
 
   return (
     <>
-      {token === "" && <Redirect href="/login" />}
-      {token !== "" && <Redirect href="/home" />}
+      {token === "" ? <Redirect href="/login" /> : null}
+      {token !== "" ? <Redirect href="/home" /> : null}
     </>
   );
 }
