@@ -49,13 +49,21 @@ const Measurement = ({ id, showDetail }) => {
         }}
       >
         <View style={{ width: "100%" }}>
-          <View style={{ width: 200 }}>
-            <Text>{Dayjs(item.date).format("YYYY-MM-DD")}</Text>
+          <View style={{ alignItems: "flex-end" }}>
+            <Text style={{ textAlign: "right" }}>
+              {Dayjs(item.date).format("YYYY-MM-DD")}
+            </Text>
           </View>
           <View style={{ width: "100%", flexDirection: "row" }}>
-            <Text>{item.systolic}</Text>
-            <Text>{item.diastolic}</Text>
-            <Text>{item.ppm}</Text>
+            <Text>HIGH:</Text>{" "}
+            <Text style={{ width: 30 }}>{item.systolic}</Text>
+            <Text>LOW:</Text>
+            <Text style={{ width: 30 }}>{item.diastolic}</Text>
+            <Text>PPM:</Text>
+            <Text style={{ width: 30 }}>{item.ppm}</Text>
+          </View>
+          <Line />
+          <View>
             <Text>{item.observation}</Text>
           </View>
         </View>
