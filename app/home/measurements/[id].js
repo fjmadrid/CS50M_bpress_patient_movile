@@ -155,7 +155,7 @@ export default function DetailsMeasurementScreen() {
                       editable={editing}
                     />
                     <MyTextInput
-                      icon="chevron-up"
+                      icon="chevron-down"
                       label="Diastolic pressure"
                       placeholder="70"
                       placeholderTextColor={darkLight}
