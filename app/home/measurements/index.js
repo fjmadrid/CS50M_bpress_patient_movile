@@ -57,15 +57,15 @@ const Measurement = ({ id, showDetail }) => {
             <Moment fromNow>{item.date.toString()}</Moment>
           </View>
           <View style={{ width: "100%", flexDirection: "row" }}>
-            <Text>HIGH:</Text>{" "}
+            <Text>{"HIGH:"}</Text>
             <Text style={{ width: 30 }}>{item.systolic}</Text>
-            <Text>LOW:</Text>
+            <Text>{"LOW:"}</Text>
             <Text style={{ width: 30 }}>{item.diastolic}</Text>
-            <Text>PPM:</Text>
+            <Text>{"PPM:"}</Text>
             <Text style={{ width: 30 }}>{item.ppm}</Text>
           </View>
-          <Line />
           <View>
+            <Line />
             <Text>{item.observation}</Text>
           </View>
         </View>
