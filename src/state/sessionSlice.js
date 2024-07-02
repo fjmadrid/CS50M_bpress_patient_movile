@@ -15,6 +15,7 @@ export const signIn = createAsyncThunk(
       `Calling api_login with credentials: ${JSON.stringify(credentials)}`
     );
     const response = await api_login(credentials);
+    console.log("Response: ", JSON.stringify(response));
     return response.data;
   }
 );
