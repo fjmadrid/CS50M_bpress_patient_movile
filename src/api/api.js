@@ -4,6 +4,7 @@ import { API_URL } from "../constants";
 
 export const api_login = (credentials) => {
   console.log("In api, login and fetching a session token");
+  axios.defaults.headers.common["Authorization"] = "";
   return axios.post(API_URL + "authentication/login/", credentials);
 };
 
