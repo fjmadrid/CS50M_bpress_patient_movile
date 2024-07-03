@@ -71,8 +71,12 @@ export default function DetailsMeasurementScreen() {
           setEditStatus("succeeded");
         }
       } catch (err) {
+        console.log(
+          "In handleEditMeasurement, caught exception: ",
+          JSON.stringify(err)
+        );
         setEditStatus("failed");
-        setEditError(err);
+        setEditError(err.message ? err.message : "network error!");
       }
     }
   };
