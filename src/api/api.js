@@ -36,6 +36,11 @@ export const api_editMeasurement = (data) => {
   return axios.put(API_URL + `patient/measurement/${data.id}/`, data);
 };
 
+export const api_fetchMessages = () => {
+  console.log("In api, fetching messages");
+  return axios.get(API_URL + "patient/message/");
+};
+
 // export const login = async (credentials, setPatient, setDoctor) => {
 //   const resp1 = await axios.post(
 //     API_URL + "authentication/login/",
