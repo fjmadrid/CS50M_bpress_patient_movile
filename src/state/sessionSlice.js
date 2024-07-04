@@ -10,13 +10,28 @@ export const initialSessionState = {
 
 export const signIn = createAsyncThunk(
   "session/signIn",
-  async (credentials) => {
-    console.log(
-      `Calling api_login with credentials: ${JSON.stringify(credentials)}`
-    );
-    const response = await api_login(credentials);
-    console.log("Response: ", JSON.stringify(response));
-    return response.data;
+  async (credentials, { rejectWithValue }) => {
+    try {
+      console.log(
+        `In action session/signIn, calling api_login with credentials: ${JSON.stringify(
+          credentials
+        )}`
+      );
+      const response = await api_login(credentials);
+      console.log(
+        "In actiion session/signIn, Response: ",
+        JSON.stringify(response)
+      );
+      const { status, statusText, data } = response;
+      if (status === 200) return data;
+      else return rejectWithValue(statusText);
+    } catch (error) {
+      console.log(
+        "In action session/signIn, caught exception. error: ",
+        JSON.stringify(error)
+      );
+      return rejectWithValue(error?.message ? error.message : "network error.");
+    }
   }
 );
 
@@ -42,7 +57,7 @@ export const sessionSlice = createSlice({
       .addCase(signIn.fulfilled, (state, action) => {
         state.status = "succeeded";
         console.log(
-          `action signIn success with response data: ${JSON.stringify(
+          `In action signIn success with response data: ${JSON.stringify(
             action.payload
           )}`
         );
