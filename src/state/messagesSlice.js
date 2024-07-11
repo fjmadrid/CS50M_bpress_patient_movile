@@ -8,7 +8,7 @@ import { api_fetchMessages } from "../api/api";
 
 const messagesAdapter = createEntityAdapter({
   selectId: (instance) => instance.id,
-  sortComparer: (a, b) => b.date.localeCompare(a.date),
+  sortComparer: (a, b) => a.date.localeCompare(b.date),
 });
 
 const initialState = messagesAdapter.getInitialState({
@@ -51,9 +51,6 @@ const messagesSlice = createSlice({
     },
     addNewMessage(state, action) {
       messagesAdapter.addOne(state, action.payload);
-    },
-    editMessage(state, action) {
-      messagesAdapter.setOne(state, action.payload);
     },
   },
   extraReducers(builder) {
