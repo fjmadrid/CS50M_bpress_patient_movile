@@ -41,6 +41,11 @@ export const api_fetchMessages = () => {
   return axios.get(API_URL + "patient/message/");
 };
 
+export const api_sendMessage = (text) => {
+  console.log(`In api, sending message from patient. text:"${text}"`);
+  return axios.post(API_URL + "patient/message/", { text });
+};
+
 // export const login = async (credentials, setPatient, setDoctor) => {
 //   const resp1 = await axios.post(
 //     API_URL + "authentication/login/",
