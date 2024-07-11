@@ -90,6 +90,7 @@ export default function MessagesScreen() {
   else {
     content = (
       <FlatList
+        inverted
         data={messagesIds}
         renderItem={({ item }) => (
           <Measurement id={item} patientId={patientId} />

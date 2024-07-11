@@ -8,7 +8,7 @@ import { api_fetchMessages } from "../api/api";
 
 const messagesAdapter = createEntityAdapter({
   selectId: (instance) => instance.id,
-  sortComparer: (a, b) => a.date.localeCompare(b.date),
+  sortComparer: (a, b) => b.date.localeCompare(a.date),
 });
 
 const initialState = messagesAdapter.getInitialState({
