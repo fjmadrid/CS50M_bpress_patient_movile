@@ -142,6 +142,7 @@ const NewMessage = () => {
           setSendError(`Response ${status}: ${statusText}`);
         } else {
           dispatch(addNewMessage(data));
+          setMessageText("");
           setSendStatus("succeeded");
         }
       } catch (err) {
