@@ -160,9 +160,17 @@ const NewMessage = () => {
     <View>
       {sendStatus === "failed" ? <MsgBox>{sendError}</MsgBox> : null}
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <StyledButton onPress={() => handleSend(messageText)}>
-          <FontAwesome name={"paper-plane"} size={20} color={primary} />
-        </StyledButton>
+        {sendStatus !== "pending" ? (
+          <StyledButton onPress={() => handleSend(messageText)}>
+            <FontAwesome name={"paper-plane"} size={20} color={primary} />
+          </StyledButton>
+        ) : null}
+        {sendStatus === "pending" ? (
+          <StyledButton disabled={true}>
+            <ActivityIndicator size={20} color={primary} />
+          </StyledButton>
+        ) : null}
+
         <MessageTextInput
           onChangeText={(value) => setMessageText(value)}
           value={messageText}
