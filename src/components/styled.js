@@ -36,6 +36,12 @@ export const InnerContainer = styled.View`
   align-items: center;
 `;
 
+export const MessagesContainer = styled.View`
+  flex: 1;
+  width: 100%;
+  height: 90%;
+`;
+
 export const WelcomeContainer = styled(InnerContainer)`
   padding: 25px;
   padding-top: 10px;
@@ -101,6 +107,14 @@ export const StyledTextInput = styled.TextInput`
   height: 60px;
   margin-vertical: 3px;
   margin-bottom: 10px;
+  color: ${tertiary};
+`;
+
+export const MessageTextInput = styled.TextInput`
+  background-color: ${secondary};
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16px;
   color: ${tertiary};
 `;
 
